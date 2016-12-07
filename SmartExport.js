@@ -1,8 +1,7 @@
-define( ["jquery","qlik","css!./SmartExport.css","./FileSaver"],
+define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexport"],
 	
 	function (jquery,qlik) {
 		$( '<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">' ).appendTo( "head" );
-		
 		
 		function toggleId () {
 			var cnt = $( ".SmartExport-tooltip" ).remove();
@@ -20,10 +19,14 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver"],
 						$( el ).find( '.SmartExport-btn' ).on( 'click', function () {
 							model.getProperties().then( function ( reply ) {
 								var app = qlik.currApp();
+								
 								var vObjectId = reply.qInfo.qId;
+								
 								var iterator = 0;
 								var currentSelections = new Array();
 								app.getObject('CurrentSelections').then(function(model){
+									var QV01 = app.getObject( 'QV01', vObjectId );
+									
 									iterator = model.layout.qSelectionObject.qSelections.length;
 									currentSelections = model.layout.qSelectionObject.qSelections;
 									
@@ -51,17 +54,67 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver"],
 										}
 									}
 									vTextSelections += '</i>';
-								
-									var vEncodeHead = '<html><head><meta charset="UTF-8"></head>';
-									var vInputReplace = '<div class="SmartExport-tooltip"><a class="SmartExport-btn" title="properties"><i class="small material-icons">input</i></a></div>';
-									var blob = new Blob([vEncodeHead + ((jquery(jquery.find("div[tid*='"+vObjectId+"']")).html().split('<button').join('<!--<button')).split('/button>').join('/button>-->')).split(vInputReplace).join(vTextSelections) + '</html>'], {
-										type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-										});
-								
-									saveAs(blob, "Report.xls");
+									
+									var vModal = '<div id="myModal" class="modal">' +
+									'<div class="modal-content">' +
+									  '<div class="modal-header">' +
+									    '<span class="close"> x </span>' +
+									    '<h4> ( need preview ) </h4>' +									    
+									    
+									  '</div>' +
+									  '<div class="modal-body">' +
+									    '<div class="box" style="width:20000px;height: 50000px">' +
+										'<div class="qvobject" id="QV01" style="position: relative; width: 20000px;height: 50000px;"></div>' +
+										'<div id="ExportEditor" style="position: fixed; z-index:2; width: 100%; height: 100%; left: 0; top: 125px;background:#ccc;opacity:0.8">' +
+											'<button id="XLSButton" class="XLSbtn">XLS</button>' +
+											'<button id="WordButton" class="Wordbtn">Word</button>' +
+										'</div>' +
+									    '</div>' +
+									  '</div>' +
+									  '<div class="modal-footer">' +
+									    '<h3>Modal Footer</h3>' +
+									  '</div>' +
+									'</div>' +
+									'</div>';									
+									
+									
+									$( document.body ).append( vModal );
+									
+									var modal = document.getElementById('myModal');
+
+									
+									var span = document.getElementsByClassName("close")[0];
+									var btn = document.getElementById("XLSButton");
+									modal.style.display = "block";
+									
+									XLSButton.onclick = function() {
+										modal.style.display = "none";   
+										var vEncodeHead = '<html><head><meta charset="UTF-8"></head>';
+										var blob = new Blob([vEncodeHead + document.getElementById('QV01').innerHTML + vTextSelections + '</html>'], {
+											type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+											});
+									
+										saveAs(blob, "Report.xls");
+									}
+									WordButton.onclick = function() {
+										modal.style.display = "none";
+										
+										var newNode = document.createElement('div');      
+										newNode.innerHTML = vTextSelections;
+										
+										document.getElementById('QV01').appendChild(newNode);
+										$("#QV01").wordExport();
+									}
+									
+									// When the user clicks on <span> (x), close the modal
+									span.onclick = function() {
+										modal.style.display = "none";    									    									
+									}									
+									//$( document.body ).remove( vModal );
 								});
 								
 							});
+							
 						});
 					} 
 				} );

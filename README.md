@@ -18,5 +18,11 @@ It exports the table as a spreadsheet, that Excel can manage.
 
 1. Basic export only to XLS
 
-Current Issues:
+Version 1 Issues:
 - it only exports the info that is shown in the screen, existing info only available with scrolling won't be exported.
+
+
+### Version 2
+Export to XLS and Word
+Export all the table content, even the not visible content in the screen,
+for doing that it's need to have a preview in order to allow to extend all the html code of the table
