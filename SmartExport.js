@@ -86,8 +86,9 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 									var span = document.getElementsByClassName("close")[0];
 									var btn = document.getElementById("XLSButton");
 									modal.style.display = "block";
-									
+									console.log('1:' + currentSelections.length);
 									XLSButton.onclick = function() {
+										console.log('2:' + currentSelections.length);
 										modal.style.display = "none";   
 										var vEncodeHead = '<html><head><meta charset="UTF-8"></head>';
 										var blob = new Blob([vEncodeHead + document.getElementById('QV01').innerHTML + vTextSelections + '</html>'], {
