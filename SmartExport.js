@@ -22,38 +22,11 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 								
 								var vObjectId = reply.qInfo.qId;
 								
-								var iterator = 0;
-								var currentSelections = new Array();
+								
+								
 								app.getObject('CurrentSelections').then(function(model){
-									var QV01 = app.getObject( 'QV01', vObjectId );
+									var QV01 = app.getObject( 'QV01', vObjectId );																										
 									
-									iterator = model.layout.qSelectionObject.qSelections.length;
-									currentSelections = model.layout.qSelectionObject.qSelections;
-									
-									var vTextSelections='';
-									var vTextSelections = '<i><u><b style="color:#1f7044">Current Selections</b></u><br>';
-									
-									
-									if (iterator == 0) {
-										vTextSelections += 'none</i>';
-									}
-									
-									for (var ai = 0;ai < iterator;ai++ ) {
-									    var value = currentSelections[ai];
-										
-										if (value.qSelectedCount > 6) {
-										    vTextSelections += '<a style = "color:#375623">';
-										    vTextSelections += value.qField + ' : ' + value.translation;
-										    vTextSelections +=  '</a><br>';
-										    						    
-										} else {
-										    vTextSelections += '<a style = "color:#375623">';
-										    vTextSelections += value.qField + ' : ' + value.qSelected;
-										    vTextSelections +=  '</a><br>';
-										    
-										}
-									}
-									vTextSelections += '</i>';
 									
 									var vModal = '<div id="myModal" class="modal">' +
 									'<div class="modal-content">' +
@@ -86,9 +59,37 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 									var span = document.getElementsByClassName("close")[0];
 									var btn = document.getElementById("XLSButton");
 									modal.style.display = "block";
-									console.log('1:' + currentSelections.length);
+									//console.log('1:' + currentSelections.length);
 									XLSButton.onclick = function() {
-										console.log('2:' + currentSelections.length);
+										var iterator = 0;
+										iterator = model.layout.qSelectionObject.qSelections.length;
+										var currentSelections = new Array();
+										currentSelections = model.layout.qSelectionObject.qSelections;
+										var vTextSelections='';
+										var vTextSelections = '<i><u><b style="color:#1f7044">Current Selections</b></u><br>';
+										
+										
+										if (iterator == 0) {
+											vTextSelections += 'none</i>';
+										}
+										
+										for (var ai = 0;ai < iterator;ai++ ) {
+										    var value = currentSelections[ai];
+											
+											if (value.qSelectedCount > 6) {
+											    vTextSelections += '<a style = "color:#375623">';
+											    vTextSelections += value.qField + ' : ' + value.translation;
+											    vTextSelections +=  '</a><br>';
+																	    
+											} else {
+											    vTextSelections += '<a style = "color:#375623">';
+											    vTextSelections += value.qField + ' : ' + value.qSelected;
+											    vTextSelections +=  '</a><br>';
+											    
+											}
+										}
+										vTextSelections += '</i>';
+										console.log('2:' + vTextSelections);
 										modal.style.display = "none";   
 										var vEncodeHead = '<html><head><meta charset="UTF-8"></head>';
 										var blob = new Blob([vEncodeHead + document.getElementById('QV01').innerHTML + vTextSelections + '</html>'], {
@@ -98,6 +99,33 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 										saveAs(blob, "Report.xls");
 									}
 									WordButton.onclick = function() {
+										var iterator = 0;
+										iterator = model.layout.qSelectionObject.qSelections.length;
+										var currentSelections = new Array();
+										currentSelections = model.layout.qSelectionObject.qSelections;
+										var vTextSelections='';
+										var vTextSelections = '<i><u><b style="color:#1f7044">Current Selections</b></u><br>';
+										
+										
+										if (iterator == 0) {
+											vTextSelections += 'none</i>';
+										}
+										
+										for (var ai = 0;ai < iterator;ai++ ) {
+										    var value = currentSelections[ai];
+											
+											if (value.qSelectedCount > 6) {
+											    vTextSelections += '<a style = "color:#375623">';
+											    vTextSelections += value.qField + ' : ' + value.translation;
+											    vTextSelections +=  '</a><br>';
+																	    
+											} else {
+											    vTextSelections += '<a style = "color:#375623">';
+											    vTextSelections += value.qField + ' : ' + value.qSelected;
+											    vTextSelections +=  '</a><br>';											    
+											}
+										}
+										vTextSelections += '</i>';
 										modal.style.display = "none";
 										
 										var newNode = document.createElement('div');      
@@ -134,3 +162,4 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 		};
 
 	} );
+
