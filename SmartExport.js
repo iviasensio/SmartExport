@@ -89,7 +89,7 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 											}
 										}
 										vTextSelections += '</i>';
-										console.log('2:' + vTextSelections);
+										
 										modal.style.display = "none";   
 										var vEncodeHead = '<html><head><meta charset="UTF-8"></head>';
 										var blob = new Blob([vEncodeHead + document.getElementById('QV01').innerHTML + vTextSelections + '</html>'], {
