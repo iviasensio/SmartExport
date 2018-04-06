@@ -4,15 +4,17 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 		$( '<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">' ).appendTo( "head" );
 		
 		function toggleId () {
+			var ancho = '130px';
 			var cnt = $( ".SmartExport-tooltip" ).remove();
 			if ( cnt.length === 0 ) {
                 $( '.qv-object, .qv-panel-sheet' ).each( function ( i, el ) {
 					var s = angular.element( el ).scope();
 					if ( s.layout || (s.$$childHead && s.$$childHead.layout) ) {
+						
 						if(s.model.layout.qInfo.qType == 'table' || s.model.layout.qInfo.qType == 'pivot-table'){
 							var layout = s.layout || s.$$childHead.layout, model = s.model || s.$$childHead.model;
 							$( el ).append( '<div class="SmartExport-tooltip">' +
-							'<a class="SmartExport-btn" title="properties"><i class="small material-icons">input</i></a>' +
+							'<a class="SmartExport-btn" title="properties"><i class="small material-icons">face</i></a>' +
 							
 							"</div>" );
 						}
@@ -52,14 +54,14 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 									
 									
 									$( document.body ).append( vModal );
-									
+								
 									var modal = document.getElementById('myModal');
 
 									
 									var span = document.getElementsByClassName("close")[0];
 									var btn = document.getElementById("XLSButton");
 									modal.style.display = "block";
-									//console.log('1:' + currentSelections.length);
+								
 									XLSButton.onclick = function() {
 										var iterator = 0;
 										iterator = model.layout.qSelectionObject.qSelections.length;
@@ -92,7 +94,21 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 										
 										modal.style.display = "none";   
 										var vEncodeHead = '<html><head><meta charset="UTF-8"></head>';
-										var blob = new Blob([vEncodeHead + document.getElementById('QV01').innerHTML + vTextSelections + '</html>'], {
+										var vEncodeBody = document.getElementById('QV01').innerHTML;
+										
+										var vWidthIndex = vEncodeBody.lastIndexOf('style="width: ');
+										
+										var txt = vEncodeBody.substring(vWidthIndex,(vWidthIndex + 24));
+										var numb = txt.match(/\d/g);
+										numb = numb.join("");
+										var numpx = numb + 'px';
+										
+										
+										var re = new RegExp(numpx,"g");
+
+										
+										vEncodeBody = vEncodeBody.replace( re,ancho) ;
+										var blob = new Blob([vEncodeHead + vEncodeBody + vTextSelections + '</html>'], {
 											type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
 											});
 									
@@ -162,4 +178,3 @@ define( ["jquery","qlik","css!./SmartExport.css","./FileSaver","./jquery.wordexp
 		};
 
 	} );
-
