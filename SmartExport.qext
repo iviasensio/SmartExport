@@ -1,9 +1,9 @@
 {
 	"name" : "Smart Export",
-	"description" : "Export to Excel",
+	"description" : "Right export to Excel, Word and PDF",
 	"preview": "SmartExport.png",
 	"type" : "visualization",
 	"icon" : "table",
-	"version": "2.0",
+	"version": "3.0",
 	"author": "Ivan Felipe ife@qlik.com QlikTech Iberia,s.l."
 }

@@ -15,6 +15,7 @@
     -ms-user-select: text;
     user-select: text;
 }
+
 .SmartExport-btn {
 	position: absolute;
 	bottom: 25px;
@@ -27,7 +28,7 @@
 	text-align: center;
 	outline: 0;
 	-webkit-tap-highlight-color: transparent;
-	color: #FFF;
+	/*color: #FFF;
 	background-color: #1f7044; /* color = Excel green */
 	border-radius: 50%;
 	-webkit-transition: .2s ease-out;
@@ -73,7 +74,132 @@
 	line-height: 55.5px;
 	font-size: 2.2rem;
 }
+/* The Modal Ask(background) */
+.modalAsk {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 25%; /* Location of the box */
+    left: 35%;
+    top: 0;
+    width: 300px; /* Full width */
+    height: 150px; /* Full height */
+   
+}
+}
+.modalAsk .modalAsk-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+.modalAsk .modalAsk-header {
+    padding: 2px 16px;
+    background-color: #1f7044;
+    color: white;
+    font-size: 15px;
+}
+.modalAsk .modalAsk-body {padding: 2px 16px;}
 
+.modalAsk .close {
+    color: white;
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+}
+.MSExcelbtn {
+    background-color: #1f7044; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 0px;
+    width:80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.MSExcelbtn.active, MSExcelbtn:active, .MSExcelbtn.focus, OKbutton:focus, .MSExcelbtn:hover {
+    background-color: rgb(0,128,0);
+    border-color: #204d74;
+}
+
+.MSWordbtn {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 0px;
+    width:80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.MSWordbtn.active, MSWordbtn:active, .MSWordbtn.focus, OKbutton:focus, .MSWordbtn:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.MSPDFbtn {    
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 10px 0px;
+    width:80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.MSPDFbtn.active, MSPDFbtn:active, .MSPDFbtn.focus, OKbutton:focus, .MSPDFbtn:hover {
+    background-color:#c9302c;
+    border-color:#ac2925;
+}
+.Port_land_form{
+    width: 200px;
+    float: left;
+    position: relative;
+    top: 3.5%;
+    left: 51%;
+    color: #dd4e42;
+}
+.Cancelbutton {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    left: 70px;
+}
+.Cancelbutton:active, .Cancelbutton:hover {
+    background-color:#c9302c;
+    border-color:#ac2925;
+}
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
