@@ -13,6 +13,10 @@ When you press the button it will show an icon over the table objects to allow e
 
 It exports the table as a spreadsheet, that Excel can manage.
 
+### Look
+![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport1.gif)
+![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport2.gif)
+![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport3.gif)
 
 ### Version 1
 
