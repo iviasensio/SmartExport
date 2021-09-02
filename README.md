@@ -1,4 +1,4 @@
-# Qlik Sense Smart Export (based on the Extension Dev tool from Erik Wetterberg)
+# Qlik Sense Smart Export
 # Author Ivan Felipe ife@qlik.com QlikTech Iberia
 # Contributors : Sergi Vives Qlik UX designer.
 Special thanks to Sergi for his expertise and knowledge transfer in web design.
