@@ -87,10 +87,29 @@ define([], function () {
                                     color: "#FFF"  
                                 }                                
                             }
+                        }                         
+                    },
+                    about: {
+                        component: "items",
+                        label: "About",
+                        items: {
+                            header: {
+                                label: "SmartExport Extension",
+                                style: "header",
+                                component: "text"
+                            },
+                            paragraph1: {
+                                label: "SmartExport extension is deployed to allow a right data export preserving the whole look&feel.",
+                                component: "text"
+                            },
+                            paragraph2: {
+                                label: "SmartExport is an extension created by Ivan Felipe, offered under MIT License.",
+                                component: "text"
+                            }
                         }
-                    }                                                    
+                    }
                 }
-            }
+            }            
         }
     }
 });

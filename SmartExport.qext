@@ -4,6 +4,11 @@
 	"preview": "SmartExport.png",
 	"type" : "visualization",
 	"icon" : "table",
-	"version": "3.0",
+	"version": "6.0",
+	"bundle": {
+        "id": "qlik-smart-bundle",
+        "name": "Qlik Smart bundle",
+        "description": "This is a set of 3rd part supported objects that will facilitate dashboard creation in Qlik Sense: An export tool, commentaries, PL reporting, smart text, smart gauge, simple Gantt, Venn. These can be used in addition to the objects found under \"Charts\".\n\nFor limitations and support conditions, see the documentation."
+    },
 	"author": "Ivan Felipe ife@qlik.com QlikTech Iberia,s.l."
 }

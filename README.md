@@ -46,3 +46,10 @@ Allows exporting to PDF
 ### Version 5 (24-nov-2020):
 - Allow to decide if you want to exoprt title, subtitle, footer and current selections also in PDF
 - Fix some bugs in Word and PDF export, still showing 'Table' labels and others
+
+### Version 6 (2-nov-2021):
+- Improve PivotTable export to xls:
+	- keep the dimension labels
+	- control de width of the columns
+- The google icons library has been replaced by leonardo.js, a Qlik native one (no more issues rendering icons in SaaS and no internet access using Windows versions)
+- FileSaver.js updated

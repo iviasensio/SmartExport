@@ -11,24 +11,26 @@ define( ["jquery",
 	function ($,qlik,cssContent,FileSaver,wordexport,htmltopdf,properties) {
 		'use strict';	
 		
-		$( '<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">' ).appendTo( "head" );
+		//$( '<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">' ).appendTo( "head" );
 		
 		function toggleId () {	
-			var ancho = '130px';
 			var vWidth = '20000px';
 			var vHeight = '50000px';
+			var vTableType = '';
+
 		    $( '.qv-object, .qv-panel-sheet' ).each( function ( i, el ) {
 				var s = angular.element( el ).scope();
 
 				if ( s.layout || (s.$$childHead && s.$$childHead.layout) ) {
-					
-					if(s.model.layout.qInfo.qType == 'table' || s.model.layout.qInfo.qType == 'pivot-table'){
+					if(s.model.layout.qInfo.qType == 'table' || s.model.layout.qInfo.qType == 'pivot-table'){// || s.model.layout.qInfo.qType == 'qlik-smart-pivot'){
 						var layout = s.layout || s.$$childHead.layout, model = s.model || s.$$childHead.model;
 						$( el ).append( '<div class="SmartExport-tooltip">' +
-						'<a id="SmartExportBtn" class="SmartExport-btn" style="color:' + laySet.color + ';background:' + laySet.background + '" title="properties"><i class="small material-icons">get_app</i></a>' +							
+						'<a id="SmartExportBtn" class="SmartExport-btn" style="color:' + laySet.color + ';background:' + laySet.background + '" title="' + s.model.layout.qInfo.qType + '"><i class="lui-icon lui-icon--export"></i></a>' +							
 						'</div>' );
 					}
 					$( el ).find('#SmartExportBtn').on( 'click', function () {
+						vTableType = this.title;
+						
 						model.getProperties().then( function ( reply ) {
 							var app = qlik.currApp();
 							
@@ -78,11 +80,22 @@ define( ["jquery",
 								modal.style.display = "block";
 							
 								XLSButton.onclick = function() {
-									
+									//buttons treatment
+									var vDimLabels = new Array();
 									var elements = document.getElementById('QVSmartExport02').getElementsByClassName('lui-button');
 								    while(elements.length > 0){
+								    	//in case of pivot-table it's necessary to get the dimension labels detailed in the dimension buttons
+								    	if(vTableType == 'pivot-table'){
+									    	var vDims = elements[0].getElementsByTagName('div');
+									    	var vSpan = elements[0].getElementsByTagName('span');
+									    	if(vSpan.length > 0){
+									    		vDimLabels.push(vDims[0].innerText)
+									    	}
+									    }
+								    	//remove all buttons before export	
 								    	elements[0].parentNode.removeChild(elements[0]);									    	
 								    }
+								    
 								    var vTextSelections = '';
 								    if(laySet.selections){
 										var iterator = 0;
@@ -129,6 +142,23 @@ define( ["jquery",
 									}
 
 									var header = vEncodeCode.getElementsByTagName("header");
+									//in case of pivot-table apply button labels and adjust column width								    
+								    if(vTableType == 'pivot-table'){
+								    	var re = new RegExp(String.fromCharCode(160), "g");
+								    	var tdelements = vEncodeCode.getElementsByTagName('col');
+								    	for(var vtd = 1;vtd < tdelements.length;vtd++){								    		
+								    		tdelements[vtd].style.cssText = 'width:135px';//that's the std column width for pivot tables values								    		
+								    	}
+								    	var thelements = vEncodeCode.getElementsByTagName('th');
+								    	for(var vth = 0;vth < thelements.length;vth++){								    		
+								    		if(thelements[vth].title == String.fromCharCode(160)){
+								    			var spanelements = thelements[vth].getElementsByTagName('span');
+								    			spanelements[0].innerText = vDimLabels.join(' | ');								    			
+								    		}
+								    	}
+								    }
+
+								    //control titles if applicable
 									if(!laySet.title){											
 										header[0].remove();
 									}else{
@@ -146,21 +176,10 @@ define( ["jquery",
 										var footer = vEncodeCode.getElementsByClassName("qv-footer-wrapper");
 										footer[0].remove();
 									}
-									var vEncodeBody = vEncodeCode.innerHTML.replace("Load previous", "").replace("Load more", "");	
-									
-									var vWidthIndex = vEncodeBody.lastIndexOf('style="width: ');
-									
-									var txt = vEncodeBody.substring(vWidthIndex,(vWidthIndex + 24));
-									var numb = txt.match(/\d/g);
-									numb = numb.join("");
-									var numpx = numb + 'px';										
-									
-									var re = new RegExp(numpx,"g");
-									
-									vEncodeBody = vEncodeBody.replace( re,ancho) ;
+									var vEncodeBody = vEncodeCode.innerHTML.replace("Load previous", "").replace("Load more", "");
 									var blob = new Blob([vEncodeHead + vEncodeBody + vTextSelections + '</html>'], {
 										type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-										});									
+										});
 									saveAs(blob, "Report.xls");
 								}
 

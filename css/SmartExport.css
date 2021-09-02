@@ -47,10 +47,10 @@
 	--background-color: #2bbbad;
 	background-color: #6bb33f; /* hover color = qlik green */
 }
-.SmartExport-btn i{
+/*.SmartExport-btn i{
 	line-height: 25px;
 	font-size: 21px;
-}
+}*/
 
 .SmartExport-btn.fab {
 	position: fixed;
