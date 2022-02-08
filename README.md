@@ -14,9 +14,9 @@ When you press the button it will show an icon over the table objects to allow e
 It exports the table as a spreadsheet, that Excel can manage.
 
 ### Look
-![alt tag](https://badge.status.php.gt/dom-build.svg)
-![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport2.png)
-![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport3.png)
+![SmartExport1](https://user-images.githubusercontent.com/11334576/153007123-5886cf24-f643-467a-8cd8-296f249f2a5d.png)
+![SmartExport2](https://user-images.githubusercontent.com/11334576/153007143-878f71f1-fca0-4608-92c6-3a164e1b8456.png)
+![SmartExport3](https://user-images.githubusercontent.com/11334576/153007158-b1fd12e6-fed6-4f8c-a05f-5fbff9d33e5d.png)
 
 ### Version 1
 
