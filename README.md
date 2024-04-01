@@ -14,9 +14,9 @@ When you press the button it will show an icon over the table objects to allow e
 It exports the table as a spreadsheet, that Excel can manage.
 
 ### Look
-![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport1.png)
-![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport2.png)
-![alt tag](https://github.com/iviasensio/Guides/blob/master/SmartExport/SmartExport3.png)
+![alt tag](https://raw.githubusercontent.com/iviasensio/Guides/main/SmartExport/SmartExport1.png)
+![alt tag](https://raw.githubusercontent.com/iviasensio/Guides/main/SmartExport/SmartExport2.png)
+![alt tag](https://raw.githubusercontent.com/iviasensio/Guides/main/SmartExport/SmartExport3.png)
 
 ### Version 1
 
