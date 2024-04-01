@@ -163,13 +163,13 @@ define( ["jquery",
 										header[0].remove();
 									}else{
 										var H1s = header[0].getElementsByTagName("h1");
-								        H1s[0].outerHTML = H1s[0].outerHTML.replace("<h1", "<div").replace("</h1>","</div>");
-								        
-								        	
-										if(!laySet.subtitle && reply.subtitle != ""){
-											var header = vEncodeCode.getElementsByTagName("header");
-											var subtitle = header[0].getElementsByTagName("h2");
-											subtitle[0].remove();
+										if(H1s.length > 0){
+									        H1s[0].outerHTML = H1s[0].outerHTML.replace("<h1", "<div").replace("</h1>","</div>");									        									        	
+											if(!laySet.subtitle && reply.subtitle != ""){
+												var header = vEncodeCode.getElementsByTagName("header");
+												var subtitle = header[0].getElementsByTagName("h2");
+												subtitle[0].remove();
+											}
 										}
 									}
 									if(!laySet.footer){
@@ -245,13 +245,15 @@ define( ["jquery",
 										header[0].remove();
 									}else{
 										var H1s = header[0].getElementsByTagName("h1");
-								        H1s[0].outerHTML = H1s[0].outerHTML.replace("<h1", "<div").replace("</h1>","</div>");
-								        
-								        	
-										if(!laySet.subtitle && reply.subtitle != ""){
-											var header = vEncodeCode.getElementsByTagName("header");
-											var subtitle = header[0].getElementsByTagName("h2");
-											subtitle[0].remove();
+										if(H1s.length > 0){
+									        H1s[0].outerHTML = H1s[0].outerHTML.replace("<h1", "<div").replace("</h1>","</div>");
+									        
+									        	
+											if(!laySet.subtitle && reply.subtitle != ""){
+												var header = vEncodeCode.getElementsByTagName("header");
+												var subtitle = header[0].getElementsByTagName("h2");
+												subtitle[0].remove();
+											}
 										}
 									}
 									if(!laySet.footer){
@@ -327,13 +329,14 @@ define( ["jquery",
 										header[0].remove();
 									}else{
 										var H1s = header[0].getElementsByTagName("h1");
-								        H1s[0].outerHTML = H1s[0].outerHTML.replace("<h1", "<div").replace("</h1>","</div>");
-								        
-								        	
-										if(!laySet.subtitle && reply.subtitle != ""){
-											var header = vEncodeCode.getElementsByTagName("header");
-											var subtitle = header[0].getElementsByTagName("h2");
-											subtitle[0].remove();
+										if(H1s.length > 0){
+									        H1s[0].outerHTML = H1s[0].outerHTML.replace("<h1", "<div").replace("</h1>","</div>");								        
+									        	
+											if(!laySet.subtitle && reply.subtitle != ""){
+												var header = vEncodeCode.getElementsByTagName("header");
+												var subtitle = header[0].getElementsByTagName("h2");
+												subtitle[0].remove();
+											}
 										}
 									}
 									if(!laySet.footer){
