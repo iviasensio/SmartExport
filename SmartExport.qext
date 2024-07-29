@@ -4,8 +4,8 @@
 	"preview": "SmartExport.png",
 	"type" : "visualization",
 	"icon" : "table",
-	"date" : "1/4/2024",
-	"version": "7.0",
+	"date" : "29/07/2024",
+	"version": "8.0",
 	"bundle": {
         "id": "qlik-smart-bundle",
         "name": "Qlik Smart bundle",
