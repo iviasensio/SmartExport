@@ -56,3 +56,9 @@ Allows exporting to PDF
 
 ### Version 7 (4-Apr-2024):
 - Few bugs fixed related to the existence of title or not
+
+### Version 8 (29-Jul-2024):
+- Allow the use in mashups
+  Now the SmartExport extension works in mashups.
+  Just call the extension object by its ID and allocate it wherever, even in a hidden way with 1px width.
+  The export icon will appear on top of straight and pivot tables and will export successfully the data preserving original look&Feel
