@@ -13,7 +13,7 @@ define( ["jquery",
 		
 		//$( '<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">' ).appendTo( "head" );
 		
-		function toggleId () {	
+		function toggleId (currentSelections) {	
 			var vWidth = '20000px';
 			var vHeight = '50000px';
 			var vTableType = '';
@@ -22,7 +22,7 @@ define( ["jquery",
 				var s = angular.element( el ).scope();
 
 				if ( s.layout || (s.$$childHead && s.$$childHead.layout) ) {
-					if(s.model.layout.qInfo.qType == 'table' || s.model.layout.qInfo.qType == 'pivot-table'){// || s.model.layout.qInfo.qType == 'qlik-smart-pivot'){
+					if(s.model.layout.qInfo.qType == 'table' || s.model.layout.qInfo.qType == 'pivot-table'){// sn-table and sn-pivot-table not supported|| s.model.layout.qInfo.qType == 'qlik-smart-pivot'){
 						var layout = s.layout || s.$$childHead.layout, model = s.model || s.$$childHead.model;
 						$( el ).append( '<div class="SmartExport-tooltip">' +
 						'<a id="SmartExportBtn" class="SmartExport-btn" style="color:' + laySet.color + ';background:' + laySet.background + '" title="' + s.model.layout.qInfo.qType + '"><i class="lui-icon lui-icon--export"></i></a>' +							
@@ -33,7 +33,6 @@ define( ["jquery",
 						
 						model.getProperties().then( function ( reply ) {
 							var app = qlik.currApp();
-							
 							var vObjectId = reply.qInfo.qId;
 							var vObjectType = reply.qInfo.qType;
 
@@ -98,11 +97,7 @@ define( ["jquery",
 								    
 								    var vTextSelections = '';
 								    if(laySet.selections){
-										var iterator = 0;
-										iterator = model.layout.qSelectionObject.qSelections.length;
-										var currentSelections = new Array();
-										currentSelections = model.layout.qSelectionObject.qSelections;
-										
+										var iterator = currentSelections.length;
 										vTextSelections = '<i><u><b style="color:#1f7044">Current Selections</b></u><br>';											
 										
 										if (iterator == 0) {
@@ -192,10 +187,7 @@ define( ["jquery",
 								    }
 									var vTextSelections = '';
 									if(laySet.selections){
-										var iterator = 0;
-										iterator = model.layout.qSelectionObject.qSelections.length;
-										var currentSelections = new Array();
-										currentSelections = model.layout.qSelectionObject.qSelections;
+										var iterator = currentSelections.length;
 										
 										vTextSelections = '<i><u><b style="color:#1f7044">Current Selections</b></u><br>';										
 										
@@ -268,7 +260,7 @@ define( ["jquery",
 								}
 								PDFButton.onclick = function() {											
 									//var vPortLand = document.getElementById('form_port_land');
-									var vPortLandTxt = 'landscape';
+									var vPortLandTxt = 'portrait';
 									/*if(vPortLand[0].checked){
 										vPortLandTxt = 'portrait';
 									}*/
@@ -279,10 +271,7 @@ define( ["jquery",
 								    }
 								    var vTextSelections = '';
 								    if(laySet.selections){
-										var iterator = 0;
-										iterator = model.layout.qSelectionObject.qSelections.length;
-										var currentSelections = new Array();
-										currentSelections = model.layout.qSelectionObject.qSelections;
+										var iterator = currentSelections.length;
 										
 										vTextSelections = '<i id="SmartExportAdded"><u><b style="color:#1f7044">Current Selections</b></u><br>';											
 										
@@ -343,11 +332,9 @@ define( ["jquery",
 										var footer = vEncodeCode.getElementsByClassName("qv-footer-wrapper");
 										footer[0].remove();
 									}
-									$//(vEncodeCode).append(vTextSelections);
+									
 									var vEncodeBody = vEncodeCode.innerHTML.replace("Load previous", "").replace("Load more", "");	
-									//console.log(vEncodeBody)
-								    //var vEncodeBody = document.getElementById('QVSmartExport01').innerHTML;
-								    
+									
 									//get rows to define how much height I need to apply in the PDF doc
 									var heightPDF = ((((vEncodeBody.match(/<tr/g) || []).length) + 3) * 25) + 'px';	
 									
@@ -391,10 +378,16 @@ define( ["jquery",
 				showTitles: false
 			}, 
 			definition : properties,
-			paint: function ( $element,layout ) {				
-				laySet = { "title":layout.titlebool,"subtitle":layout.subtitlebool,"footer":layout.footerbool,"selections":layout.selectionsbool,"background":layout.iconbackground.color,"color":layout.iconcolor.color};
-				$( ".SmartExport-tooltip" ).remove();
-				toggleId();				
+			paint: function ( $element,layout ) {	
+				var app = qlik.currApp();
+				//var mySelectedFields;
+				app.getList("CurrentSelections", function(reply) {
+					var mySelectedFields = reply.qSelectionObject.qSelections;					
+				
+					laySet = { "title":layout.titlebool,"subtitle":layout.subtitlebool,"footer":layout.footerbool,"selections":layout.selectionsbool,"background":layout.iconbackground.color,"color":layout.iconcolor.color};
+					$( ".SmartExport-tooltip" ).remove();
+					toggleId(mySelectedFields);
+				})
 			}
 		};
 	});
