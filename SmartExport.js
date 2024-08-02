@@ -82,6 +82,8 @@ define( ["jquery",
 									//buttons treatment
 									var vDimLabels = new Array();
 									var elements = document.getElementById('QVSmartExport02').getElementsByClassName('lui-button');
+									var elementHeader = document.getElementById('QVSmartExport02').getElementsByClassName('hidden-screen-reader-label');
+									elementHeader[0].remove();
 								    while(elements.length > 0){
 								    	//in case of pivot-table it's necessary to get the dimension labels detailed in the dimension buttons
 								    	if(vTableType == 'pivot-table'){
@@ -182,6 +184,8 @@ define( ["jquery",
 									document.getElementById('BOX01').style.width = vWidth;
 									document.getElementById('QVSmartExport01').style.width = vWidth;
 									var elements = document.getElementById('QVSmartExport01').getElementsByClassName('lui-button');
+									var elementHeader = document.getElementById('QVSmartExport01').getElementsByClassName('hidden-screen-reader-label');
+									elementHeader[0].remove();
 								    while(elements.length > 0){
 								    	elements[0].parentNode.removeChild(elements[0]);									    	
 								    }
@@ -252,20 +256,16 @@ define( ["jquery",
 										var footer = vEncodeCode.getElementsByClassName("qv-footer-wrapper");
 										footer[0].remove();
 									}
-									//var vEncodeBody = vEncodeCode.innerHTML.replace("Load previous", "").replace("Load more", "").replace("get_app", "");	
-
-
+									
 									$("#QVSmartExport01").wordExport();
 									modal.style.display = "none";
 								}
 								PDFButton.onclick = function() {											
-									//var vPortLand = document.getElementById('form_port_land');
 									var vPortLandTxt = 'portrait';
-									/*if(vPortLand[0].checked){
-										vPortLandTxt = 'portrait';
-									}*/
 									
 									var elements = document.getElementById('QVSmartExport01').getElementsByClassName('lui-button');
+									var elementHeader = document.getElementById('QVSmartExport01').getElementsByClassName('hidden-screen-reader-label');
+									elementHeader[0].remove();
 								    while(elements.length > 0){
 								    	elements[0].parentNode.removeChild(elements[0]);									    	
 								    }
